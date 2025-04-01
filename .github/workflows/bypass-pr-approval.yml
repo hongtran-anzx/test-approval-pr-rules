@@ -1,0 +1,20 @@
+name: Bypass PR approval rules
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  check-approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if user-A has approved
+        run: |
+          if [[ "${{ github.event.review.user.login }}" == "hongtran-anzx" && "${{ github.event.review.state }}" == "approved" ]]; then
+            echo "hongtran-anzx approved the PR. Bypassing approval count.";
+            exit 0;  # Allow the PR to bypass approval rules
+          fi
+          exit 1;  # Fail the job if not approved by user-A
