@@ -11,10 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check if user-A has approved
+      - name: Check if hungmai-anz has approved
         run: |
-          if [[ "${{ github.event.review.user.login }}" == "hongtran-anzx" && "${{ github.event.review.state }}" == "approved" ]]; then
-            echo "hongtran-anzx approved the PR. Bypassing approval count.";
+          if [[ "${{ github.event.review.user.login }}" == "hungmai-anz" && "${{ github.event.review.state }}" == "approved" ]]; then
+            echo "hungmai-anz approved the PR. Bypassing approval count.";
             exit 0;  # Allow the PR to bypass approval rules
           fi
-          exit 1;  # Fail the job if not approved by user-A
+          exit 1;  # Fail the job if not approved by hungmai-anz
